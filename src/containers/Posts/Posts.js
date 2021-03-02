@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "../../axios";
 import Post from "../../components/Post/Post";
+import "./Posts.css";
 
 class Posts extends Component {
   state = {
-    posts: null,
+    posts: [],
     error: false,
   };
 
@@ -31,7 +32,7 @@ class Posts extends Component {
   };
 
   render() {
-    let posts = null;
+    let posts = [];
 
     if (this.state.error) {
       posts = <p>Something went wrong!</p>;
