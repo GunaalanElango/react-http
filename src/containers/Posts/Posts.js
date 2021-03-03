@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "../../axios";
 import Post from "../../components/Post/Post";
 import "./Posts.css";
+import { Link, Route } from "react-router-dom";
+import FullPost from "../FullPost/FullPost";
 
 class Posts extends Component {
   state = {
@@ -10,7 +12,6 @@ class Posts extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     axios
       .get("/posts")
       .then((response) => {
@@ -28,9 +29,9 @@ class Posts extends Component {
       });
   }
 
-  postSelectable = (postId) => {
-    this.setState({ selectedPostId: postId });
-  };
+  // postSelectable = (postId) => {
+  //   this.setState({ selectedPostId: postId });
+  // };
 
   render() {
     let posts = [];
@@ -40,17 +41,24 @@ class Posts extends Component {
     } else {
       posts = this.state.posts.map((post) => {
         return (
-          <Post
-            clicked={() => this.postSelectable(post.id)}
-            title={post.title}
-            key={post.id}
-            author={post.author}
-          />
+          <Link to={"/" + post.id} key={post.id}>
+            <Post
+              // clicked={() => this.postSelectable(post.id)}
+              title={post.title}
+              key={post.id}
+              author={post.author}
+            />
+          </Link>
         );
       });
     }
 
-    return <section className="Posts">{posts}</section>;
+    return (
+      <div>
+        <section className="Posts">{posts}</section>
+        <Route path="/:id" component={FullPost} />
+      </div>
+    );
   }
 }
 
