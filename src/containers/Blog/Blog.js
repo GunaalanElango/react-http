@@ -25,7 +25,7 @@ class Blog extends Component {
           </nav>
         </header>
         <Switch>
-          <Route
+          {/* <Route
             path="/new-posts"
             exact
             render={() => (
@@ -33,7 +33,7 @@ class Blog extends Component {
                 <NewPost />
               </Suspense>
             )}
-          />
+          /> */}
           <Route path="/" component={Posts} />
         </Switch>
       </div>
